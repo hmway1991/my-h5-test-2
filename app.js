@@ -18,6 +18,8 @@ const iphoneImages = ['pic.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg'];
 let logData = [];
 let operationCount = 0; // 操作序号
 
+let isProcessing = false;  // 防止重复触发批量进货
+
 // 初始化画布和 FPS
 function initialize() {
     const width = 719;  // 设置宽度为图片宽度
@@ -121,6 +123,9 @@ function addiPhone() {
 
 // 批量进货按钮点击事件
 function addMultipleiPhones() {
+    // 如果正在处理，阻止重复点击
+    if (isProcessing) return;
+
     let batchCount = parseInt(document.getElementById('batchInput').value);
 
     // 限制每次添加的最大数量为 1000 台
@@ -131,12 +136,16 @@ function addMultipleiPhones() {
 
     // 确保输入为有效数字
     if (batchCount > 0 && !isNaN(batchCount)) {
+        isProcessing = true;  // 标记为正在处理
         for (let i = 0; i < batchCount; i++) {
             addiPhone();  // 调用 iPhone 进货函数来批量添加图片
         }
 
-        // 记录日志，确保记录的是添加后的总元素数
-        logOperation(batchCount);
+        // 延迟记录日志，确保 FPS 更新
+        setTimeout(() => {
+            logOperation(batchCount);
+            isProcessing = false;  // 操作完成，允许再次点击
+        }, 100);  // 适当延迟确保 FPS 已更新
     } else {
         alert("请输入有效的数字！");
     }
@@ -146,13 +155,13 @@ function addMultipleiPhones() {
 function logOperation(batchCount) {
     // 获取当前时间并格式化为北京时间
     const now = new Date();
-    const beijingTime = now.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
+    const beijingTime = now.toISOString().slice(0, 19).replace("T", " ");  // 格式化时间精确到秒
 
     // 记录一条操作日志，并记录添加后的总元素数
     logData.push({
         operationNumber: ++operationCount,
         addedElements: batchCount,
-        currentFPS: fps,
+        currentFPS: fps,  // 记录当前FPS
         totalElements: iphoneObjects.length,  // 记录添加后的总元素数
         time: beijingTime
     });

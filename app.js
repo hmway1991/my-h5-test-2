@@ -135,7 +135,7 @@ function addMultipleiPhones() {
             addiPhone();  // 调用 iPhone 进货函数来批量添加图片
         }
 
-        // 记录日志
+        // 记录日志，确保记录的是添加后的总元素数
         logOperation(batchCount);
     } else {
         alert("请输入有效的数字！");

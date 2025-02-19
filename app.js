@@ -14,6 +14,10 @@ let elementCount = 0;  // 用于记录元素数量
 // 图片路径
 const iphoneImages = ['pic.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg'];
 
+// 日志存储数组
+let logData = [];
+let operationCount = 0; // 操作序号
+
 // 初始化画布和 FPS
 function initialize() {
     const width = 719;  // 设置宽度为图片宽度
@@ -65,7 +69,6 @@ function drawMovingiPhones() {
         if (iphone.x < 0 || iphone.x > warehouseCanvas.width - iphone.width) iphone.vx = -iphone.vx;
         if (iphone.y < 0 || iphone.y > warehouseCanvas.height - iphone.height) iphone.vy = -iphone.vy;
 
-        // 绘制图片
         ctx.drawImage(iphone.img, iphone.x, iphone.y, iphone.width, iphone.height);
     });
 }
@@ -102,22 +105,77 @@ function addiPhone() {
         let randomX = Math.random() * (warehouseCanvas.width - newWidth);
         let randomY = Math.random() * (warehouseCanvas.height - newHeight);
 
-        // 随机生成速度，确保图片在画布内移动
-        let randomVx = 2 + Math.random() * 3;
-        let randomVy = 2 + Math.random() * 3;
-
         iphoneObjects.push({
             x: randomX,
             y: randomY,
             width: newWidth,    // 设置宽度
             height: newHeight,  // 设置高度
-            vx: randomVx,      // 设置水平速度
-            vy: randomVy,      // 设置垂直速度
+            vx: 2 + Math.random() * 3,
+            vy: 2 + Math.random() * 3,
             img: iphoneImg
         });
 
         elementCount++;  // 增加元素数量
     };
+}
+
+// 批量进货按钮点击事件
+function addMultipleiPhones() {
+    let batchCount = parseInt(document.getElementById('batchInput').value);
+
+    // 限制每次添加的最大数量为 1000 台
+    if (batchCount > 1000) {
+        alert("单次进货最多1000台！");
+        return;  // 如果数量超过 1000，停止批量进货
+    }
+
+    // 确保输入为有效数字
+    if (batchCount > 0 && !isNaN(batchCount)) {
+        for (let i = 0; i < batchCount; i++) {
+            addiPhone();  // 调用 iPhone 进货函数来批量添加图片
+        }
+
+        // 记录日志
+        logOperation(batchCount);
+    } else {
+        alert("请输入有效的数字！");
+    }
+}
+
+// 日志记录功能
+function logOperation(batchCount) {
+    // 获取当前时间并格式化为北京时间
+    const now = new Date();
+    const beijingTime = now.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
+
+    // 记录一条操作日志，并记录添加后的总元素数
+    logData.push({
+        operationNumber: ++operationCount,
+        addedElements: batchCount,
+        currentFPS: fps,
+        totalElements: iphoneObjects.length,  // 记录添加后的总元素数
+        time: beijingTime
+    });
+
+    // 打印日志到控制台，方便调试
+    console.log(logData[logData.length - 1]);
+}
+
+// 下载 CSV 文件
+function downloadCSV() {
+    // 生成 CSV 内容
+    const csvHeader = ["序号", "添加元素数量", "当前FPS", "当前总元素数", "操作时间"];
+    const csvRows = logData.map(log => [log.operationNumber, log.addedElements, log.currentFPS, log.totalElements, log.time]);
+
+    // 将头部和数据合并
+    const csvContent = [csvHeader, ...csvRows].map(row => row.join(",")).join("\n");
+
+    // 创建一个 Blob 对象并生成下载链接
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "operation_log.csv";  // 设置下载文件名
+    link.click();  // 自动点击下载链接
 }
 
 // 菜单折叠功能

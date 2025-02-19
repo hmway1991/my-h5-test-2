@@ -19,6 +19,17 @@
         </div>
         <div id="menuContainer" style="display: block;">
             <div class="Control" onclick="addiPhone()">iPhone进货</div>
+
+            <!-- New Batch Add Section -->
+            <div class="Control">
+                <input type="number" id="batchInput" placeholder="Enter number of iPhones" min="1" max="1000" />
+                <button onclick="addMultipleiPhones()">批量进货</button>
+            </div>
+
+            <!-- Download Log Button -->
+            <div class="Control">
+                <button onclick="downloadCSV()">下载操作日志</button>
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Performance Test - Automation Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="initialize()">
+    <!-- FPS and Elements Count Display -->
+    <div id="FPSDisplay">FPS: 0</div>
+    <div id="ElementCount">Total Elements: 0</div>
+
+    <!-- Control Panel Section -->
+    <div id="ControlPanel">
+        <div class="ControlPanelHeading">
+            Control Panel
+            <span id="toggleMenu" onclick="toggleMenu()">&#x25BC;</span> <!-- Arrow for collapsing -->
+        </div>
+        <div id="menuContainer" style="display: block;">
+            <div class="Control" onclick="addSquare()">Add Square</div>
+            <div class="Control" onclick="addCircle()">Add Circle</div>
+            <div class="Control" onclick="addImage()">Add Image</div>
+            <div class="Control">
+                <input type="file" id="imageUpload" onchange="handleFileUpload(event)" style="display: none;" />
+                <button onclick="document.getElementById('imageUpload').click()">Upload Image</button>
+            </div>
+            <div class="Control">
+                <input type="number" id="randomCount" placeholder="Enter number" min="1" />
+                <button onclick="addMultipleElements()">Add Random Elements</button>
+            </div>
+            
+            <!-- Controls for Automated Testing -->
+            <div class="Control">
+                <button onclick="startAutoTest()">Start Auto Test</button>
+                <button id="stopTestButton" onclick="stopAutoTest()">Stop Auto Test</button>
+            </div>
+
+            <!-- Test Data Logging -->
+            <div class="Control">
+                <button onclick="downloadTestResults()">Download Test Results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas Elements for Display -->
+    <canvas id="SquareCanvas"></canvas>
+    <canvas id="CircleCanvas"></canvas>
+    <canvas id="ImageCanvas"></canvas>
+
+    <script src="app.js" defer></script>
+</body>
+</html>

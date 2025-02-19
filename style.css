@@ -1,0 +1,182 @@
+/* 基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;  /* 背景色 */
+    color: #333;  /* 字体颜色 */
+}
+
+/* FPS 和元素数量显示 */
+#FPSDisplay, #ElementCount {
+    position: fixed;
+    z-index: 9999;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#FPSDisplay {
+    top: 10px;
+    left: 10px;
+}
+
+#ElementCount {
+    top: 10px;
+    right: 10px;
+}
+
+/* 控制面板 */
+#ControlPanel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    font-size: 14px;
+    z-index: 10;
+}
+
+/* 菜单标题 */
+.ControlPanelHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#toggleMenu {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* 菜单项按钮 */
+.Control {
+    cursor: pointer;
+    background-color: #444;
+    color: white;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.Control:hover {
+    background-color: #666;
+}
+
+/* 输入框和按钮的样式 */
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #3b8cc0;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3676a3;
+}
+
+/* Canvas 元素 */
+canvas {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    margin: auto;
+    display: block;
+}
+
+/* 响应式设计：当屏幕宽度小于 768px 时进行布局调整 */
+@media (max-width: 768px) {
+    #ControlPanel {
+        bottom: 10px;
+        left: 10px;
+        width: 90%;
+    }
+
+    .ControlPanelHeading {
+        font-size: 16px;
+    }
+
+    #toggleMenu {
+        font-size: 16px;
+    }
+
+    .Control {
+        font-size: 12px;
+    }
+
+    input[type="number"], button {
+        font-size: 12px;
+    }
+
+    canvas {
+        width: 90vw;
+        height: auto;
+        top: 50px;
+    }
+}
+
+/* 控制面板折叠的过渡效果 */
+#menuContainer {
+    transition: max-height 0.5s ease-out;
+    overflow: hidden;
+}
+
+/* 测试结果的样式 */
+#testResults {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #222;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+#testResults button {
+    background-color: #00c853;
+    margin-top: 10px;
+}
+
+/* 控制面板按钮 */
+button#stopTestButton {
+    background-color: #ff4d4d;  /* 红色停止按钮 */
+}
+
+button#stopTestButton:hover {
+    background-color: #ff3333;
+}

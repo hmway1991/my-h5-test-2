@@ -81,32 +81,6 @@ body {
     background-color: #666;
 }
 
-/* 输入框和按钮的样式 */
-input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #3b8cc0;
-    color: white;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #3676a3;
-}
-
 /* Canvas 元素 */
 canvas {
     position: absolute;
@@ -116,6 +90,10 @@ canvas {
     bottom: 50px;
     margin: auto;
     display: block;
+    background-image: url('warehouse.jpg'); /* Apple 仓库背景 */
+    background-size: 719px 539px; /* 确保背景图尺寸为 719px x 539px */
+    width: 719px;
+    height: 539px;
 }
 
 /* 响应式设计：当屏幕宽度小于 768px 时进行布局调整 */
@@ -147,36 +125,4 @@ canvas {
         height: auto;
         top: 50px;
     }
-}
-
-/* 控制面板折叠的过渡效果 */
-#menuContainer {
-    transition: max-height 0.5s ease-out;
-    overflow: hidden;
-}
-
-/* 测试结果的样式 */
-#testResults {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #222;
-    color: white;
-    font-size: 14px;
-    border-radius: 5px;
-    width: 100%;
-    text-align: center;
-}
-
-#testResults button {
-    background-color: #00c853;
-    margin-top: 10px;
-}
-
-/* 控制面板按钮 */
-button#stopTestButton {
-    background-color: #ff4d4d;  /* 红色停止按钮 */
-}
-
-button#stopTestButton:hover {
-    background-color: #ff3333;
 }

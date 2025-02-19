@@ -1,33 +1,34 @@
-/* 基础样式 */
+/* 全局样式 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;  /* 背景色 */
-    color: #333;  /* 字体颜色 */
+    background-color: #1e1e2f;  /* 深色背景 */
+    color: #ffffff;
+    overflow: hidden;
 }
 
 /* FPS 和元素数量显示 */
 #FPSDisplay, #ElementCount {
     position: fixed;
     z-index: 9999;
-    color: #fff;
+    color: #00ffcc;  /* 霓虹绿色 */
     font-size: 20px;
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
 }
 
 #FPSDisplay {
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
 }
 
 #ElementCount {
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
 }
 
 /* 控制面板 */
@@ -38,91 +39,90 @@ body {
     background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 200px;
-    font-size: 14px;
+    border-radius: 15px;
+    width: 250px;
+    font-size: 16px;
     z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 菜单标题 */
-.ControlPanelHeading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-#toggleMenu {
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* 菜单项按钮 */
+/* 按钮样式 */
 .Control {
     cursor: pointer;
-    background-color: #444;
-    color: white;
+    background: linear-gradient(135deg, #00b5e2, #005e70);
+    color: #fff;
     margin: 8px 0;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 14px;
+    padding: 12px;
+    border-radius: 8px;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .Control:hover {
-    background-color: #666;
+    background: linear-gradient(135deg, #005e70, #00b5e2);
+    transform: scale(1.05);
 }
 
-/* Canvas 元素 */
+/* 输入框 */
+input[type="number"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+/* 渐变背景 */
 canvas {
     position: absolute;
     top: 100px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
-    background-image: url('warehouse.jpg'); /* Apple 仓库背景 */
-    background-size: 719px 539px; /* 确保背景图尺寸为 719px x 539px */
-    width: 719px;
-    height: 539px;
+    width: 719px;   /* 固定画布宽度 */
+    height: 539px;  /* 固定画布高度 */
+    background-image: url('warehouse.jpg');
+    background-size: cover;  /* 背景图适应画布 */
+    background-position: center;
+    border-radius: 15px;
 }
 
-/* 响应式设计：当屏幕宽度小于 768px 时进行布局调整 */
+/* 动画效果 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
     #ControlPanel {
-        bottom: 10px;
-        left: 10px;
-        width: 90%;
-    }
-
-    .ControlPanelHeading {
-        font-size: 16px;
-    }
-
-    #toggleMenu {
-        font-size: 16px;
+        width: 85%;
     }
 
     .Control {
-        font-size: 12px;
+        font-size: 14px;
     }
 
-    input[type="number"], button {
-        font-size: 12px;
+    #FPSDisplay, #ElementCount {
+        font-size: 18px;
+        padding: 10px;
     }
 
     canvas {
-        width: 90vw;
-        height: auto;
+        width: 90vw;   /* 在小屏幕下，画布宽度占 90% */
+        height: auto;  /* 高度按宽度比例自动调整 */
         top: 50px;
     }
 }

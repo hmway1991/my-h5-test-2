@@ -7,33 +7,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initialize()">
-    <!-- FPS and Elements Count Display -->
+    <!-- FPS 和元素数量显示 -->
     <div id="FPSDisplay">FPS: 0</div>
     <div id="ElementCount">Total Elements: 0</div>
 
-    <!-- Control Panel Section -->
+    <!-- 控制面板 -->
     <div id="ControlPanel">
         <div class="ControlPanelHeading">
-            Control Panel
-            <span id="toggleMenu" onclick="toggleMenu()">&#x25BC;</span> <!-- Arrow for collapsing -->
+            控制面板
+            <span id="toggleMenu" onclick="toggleMenu()">&#x25BC;</span>
         </div>
         <div id="menuContainer" style="display: block;">
             <div class="Control" onclick="addiPhone()">iPhone进货</div>
-
-            <!-- New Batch Add Section -->
             <div class="Control">
                 <input type="number" id="batchInput" placeholder="Enter number of iPhones" min="1" max="1000" />
-                <button onclick="addMultipleiPhones()">批量进货</button>
+                <button class="Control" onclick="addMultipleiPhones()">批量进货</button>
             </div>
-
-            <!-- Download Log Button -->
             <div class="Control">
-                <button onclick="downloadCSV()">下载操作日志</button>
+                <button class="Control" onclick="downloadCSV()">下载操作日志</button>
             </div>
         </div>
     </div>
 
-    <!-- Canvas Elements for Display -->
+    <!-- 画布 -->
     <canvas id="WarehouseCanvas"></canvas>
 
     <script src="app.js" defer></script>

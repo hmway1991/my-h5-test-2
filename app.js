@@ -155,7 +155,17 @@ function addMultipleiPhones() {
 function logOperation(batchCount) {
     // 获取当前时间并格式化为北京时间
     const now = new Date();
-    const beijingTime = now.toISOString().slice(0, 19).replace("T", " ");  // 格式化时间精确到秒
+
+    // 使用 Intl.DateTimeFormat 来格式化为北京时间
+    const beijingTime = new Intl.DateTimeFormat('zh-CN', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    }).format(now);  // 格式化为北京时间并精确到秒
 
     // 记录一条操作日志，并记录添加后的总元素数
     logData.push({
